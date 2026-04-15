@@ -39,18 +39,15 @@
       overflow-x: hidden;
     }
 
-    /* subtle grid background */
+    /* noise overlay */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 48px 48px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 0;
-      opacity: 0.25;
+      opacity: 0.4;
     }
 
     .container {
@@ -104,6 +101,37 @@
     #hero { min-height: 100vh; display: flex; align-items: center; padding: 0; }
 
     .hero-content { padding: 8rem 0 5rem; }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-photo {
+      width: 260px;
+      height: 320px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 16px;
+      display: block;
+      border: 1px solid var(--border);
+    }
+
+    .hero-text { flex: 1; }
+
+    @media (max-width: 720px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .hero-photo {
+        width: 160px;
+        height: 200px;
+        border-radius: 12px;
+      }
+    }
 
     .hero-label {
       font-family: var(--mono);
@@ -464,14 +492,19 @@
   <section id="hero">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-label fade-up">M.Sc. — KI &amp; Computer Vision — HS Kempten</div>
-        <h1 class="fade-up">Tobias<br><em>Barth</em></h1>
-        <p class="hero-sub fade-up">
-          Master-Student an der HS Kempten. Fokus auf KI-Agenten, KI-gestützte Robotik und Game Engineering.
-        </p>
-        <div class="hero-links fade-up">
-          <a class="btn-primary" href="#projects">Projekte ansehen</a>
-          <a class="btn-ghost" href="https://elBarthos.github.io/cv.pdf" target="_blank">Lebenslauf (PDF)</a>
+        <div class="hero-inner">
+          <img class="hero-photo" src="img/foto.png" alt="Tobias Barth" />
+          <div class="hero-text">
+            <div class="hero-label fade-up">M.Sc. — KI &amp; Computer Vision — HS Kempten</div>
+            <h1 class="fade-up">Tobias<br><em>Barth</em></h1>
+            <p class="hero-sub fade-up">
+              Master-Student an der HS Kempten. Fokus auf KI-Agenten, KI-gestützte Robotik und Game Engineering.
+            </p>
+            <div class="hero-links fade-up">
+              <a class="btn-primary" href="#projects">Projekte ansehen</a>
+              <a class="btn-ghost" href="https://elBarthos.github.io/cv.pdf" target="_blank">Lebenslauf (PDF)</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
