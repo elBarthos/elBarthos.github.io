@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tobias Barth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0e0c;
+      --bg-surface: #111612;
+      --bg-card: #141a16;
+      --accent: #1d9e75;
+      --accent-dim: #0f6e56;
+      --accent-bright: #5dcaa5;
+      --accent-glow: #1d9e7518;
+      --text: #e8ede9;
+      --text-secondary: #7a8f80;
+      --text-muted: #445049;
+      --border: #1e2a22;
+      --border-hover: #2a3d30;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ---- LAYOUT ---- */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    section { padding: 5rem 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0a0e0ccc;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: lowercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent-bright); }
+
+    /* ---- HERO ---- */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0;
+      position: relative;
+    }
+
+    .hero-grid-line {
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--border);
+      pointer-events: none;
+    }
+
+    .hero-content { padding: 8rem 0 5rem; }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--sans);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent-bright);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      padding: 0.65rem 1.4rem;
+      background: var(--accent);
+      color: #0a0e0c;
+      border: none;
+      border-radius: 3px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover { background: var(--accent-bright); transform: translateY(-1px); }
+
+    .btn-ghost {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      padding: 0.65rem 1.4rem;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-hover);
+      border-radius: 3px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent-dim);
+      color: var(--accent-bright);
+      transform: translateY(-1px);
+    }
+
+    /* ---- SECTION HEADERS ---- */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-index {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+    }
+
+    /* ---- ABOUT ---- */
+    .about-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.9;
+    }
+
+    .about-text + .about-text { margin-top: 1rem; }
+
+    .cv-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.75rem;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: gap 0.2s, color 0.2s;
+    }
+
+    .cv-link:hover { gap: 0.85rem; color: var(--accent-bright); }
+
+    /* ---- SKILLS ---- */
+    .skills-block { margin-bottom: 2rem; }
+
+    .skills-category {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .skills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--accent-dim);
+      color: var(--accent-bright);
+    }
+
+    /* ---- PROJECTS ---- */
+    .projects-list { display: flex; flex-direction: column; gap: 1px; }
+
+    .proj-item {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      transition: border-color 0.25s, background 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proj-item::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.25s ease;
+    }
+
+    .proj-item:hover { border-color: var(--border-hover); background: #161d18; }
+    .proj-item:hover::after { transform: scaleY(1); }
+
+    .proj-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .proj-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .proj-status {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    .proj-status.active { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid #1d9e7533; }
+    .proj-status.done { background: #1a1a2e; color: #7f77dd; border: 1px solid #7f77dd33; }
+
+    .proj-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 0.85rem;
+    }
+
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .proj-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .proj-tag + .proj-tag::before { content: '·'; margin-right: 5px; }
+
+    .proj-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent-dim);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s, gap 0.2s;
+    }
+
+    .proj-link:hover { color: var(--accent-bright); gap: 0.65rem; }
+
+    .projects-divider {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 2rem 0 1rem;
+    }
+
+    /* ---- CONTACT ---- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .contact-item {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      display: block;
+    }
+
+    .contact-item:hover { background: #161d18; }
+
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-value {
+      font-size: 14px;
+      color: var(--accent-bright);
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-mono {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ---- ANIMATIONS ---- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    .fade-up:nth-child(1) { animation-delay: 0.1s; }
+    .fade-up:nth-child(2) { animation-delay: 0.2s; }
+    .fade-up:nth-child(3) { animation-delay: 0.32s; }
+    .fade-up:nth-child(4) { animation-delay: 0.44s; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { gap: 1.25rem; }
+      .container { padding: 0 1.25rem; }
+      section { padding: 3.5rem 0; }
+      .hero-content { padding: 6.5rem 0 3.5rem; }
+    }
+
+    @media (max-width: 420px) {
+      .nav-links a { font-size: 10px; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">elBarthos</a>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-label fade-up">Master KI &amp; Computer Vision — HS Kempten</div>
+        <h1 class="fade-up">
+          Tobias<br><em>Barth</em>
+        </h1>
+        <p class="hero-sub fade-up">
+          ---
+        </p>
+        <div class="hero-links fade-up">
+          <a class="btn-primary" href="#projects">Projekte ansehen</a>
+          <a class="btn-ghost" href="CV_LINK_HIER.pdf" target="_blank">Lebenslauf (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-index">01</span>
+        <h2>about</h2>
+      </div>
+      <p class="about-text reveal">
+        Master-Student Informatik mit Schwerpunkt KI und Computer Vision an der Hochschule Kempten.
+      </p>
+      <p class="about-text reveal">
+        Neben dem Studium arbeite ich im Bereich KI-gestütztes Marketing und bringe
+        dort technisches Verständnis in strategische Kontexte ein.
+      </p>
+      <a class="cv-link reveal" href="CV_LINK_HIER.pdf" target="_blank">
+        Vollständiger Lebenslauf &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-index">02</span>
+        <h2>skills</h2>
+      </div>
+
+      <div class="skills-block reveal">
+        <p class="skills-category">Sprachen</p>
+        <div class="skills-row">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">C#</span>
+        </div>
+      </div>
+
+      <div class="skills-block reveal">
+        <p class="skills-category">ML / CV</p>
+        <div class="skills-row">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">Gemini API</span>
+          <span class="skill-tag">Google ADK</span>
+          <span class="skill-tag">YOLO</span>
+        </div>
+      </div>
+
+      <div class="skills-block reveal">
+        <p class="skills-category">Robotics / Embedded</p>
+        <div class="skills-row">
+          <span class="skill-tag">ROS2</span>
+          <span class="skill-tag">Raspberry Pi</span>
+          <span class="skill-tag">Linux</span>
+        </div>
+      </div>
+
+      <div class="skills-block reveal">
+        <p class="skills-category">Tools &amp; Infra</p>
+        <div class="skills-row">
+          <span class="skill-tag">Unity</span>
+          <span class="skill-tag">Blender</span>
+          <span class="skill-tag">Photoshop</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-index">03</span>
+        <h2>projects</h2>
+      </div>
+
+      <div class="projects-list">
+
+        <div class="proj-item reveal">
+          <div class="proj-header">
+            <span class="proj-name">Bullet Time Fotobox</span>
+            <span class="proj-status active">in progress</span>
+          </div>
+          <p class="proj-desc">
+            Multi-Kamera-Setup auf Raspberry Pi Basis. Synchronisiertes Auslösen mehrerer Kameras,
+            automatische Bildverarbeitung und lokale Vorschau mit Bullet-Time-Effekt.
+          </p>
+          <div class="proj-tags">
+            <span class="proj-tag">Raspberry Pi</span>
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">Verteilte Systeme</span>
+            <span class="proj-tag">Architektur</span>
+          </div>
+          <!--<a class="proj-link" href="https://github.com/elBarthos/REPO" target="_blank">GitHub &rarr;</a>-->
+        </div>
+
+        <div class="proj-item reveal">
+          <div class="proj-header">
+            <span class="proj-name">Vegan Wars</span>
+            <span class="proj-status active">in progress</span>
+          </div>
+          <p class="proj-desc">
+            Tower-Defence-Game entwickelt in Unity als privates Indie-Projekt.
+            Fokus auf Gameplay-Loop und Level-Design.
+          </p>
+          <div class="proj-tags">
+            <span class="proj-tag">Unity</span>
+            <span class="proj-tag">C#</span>
+            <span class="proj-tag">Game Design</span>
+          </div>
+          <!--<a class="proj-link" href="https://github.com/elBarthos/REPO" target="_blank">GitHub &rarr;</a>-->
+        </div>
+
+      </div>
+
+      <p class="projects-divider reveal">Abgeschlossene Projekte</p>
+
+      <div class="projects-list">
+
+        <div class="proj-item reveal">
+          <div class="proj-header">
+            <span class="proj-name">VR-Lernspiels für Schüler*innen zur Förderung von Kompetenzen im Umgang mit einem Erste-Hilfe-Koffer</span>
+            <span class="proj-status done">abgeschlossen</span>
+          </div>
+          <p class="proj-desc">
+            Bachelorarbeit: Planung und Erstellung eines VR-basierten Lernspiels, mit welchem Schüler*innen aus Partnerschulen der Frank Hirschvogel Stiftung den Inhalt und die Anwendung eines Erste-Hilfe-Koffers kennenlernen und so ihre Kompetenzen im Umgang mit diesem erweitern können.
+          </p>
+          <div class="proj-tags">
+            <span class="proj-tag">Unity</span>
+            <span class="proj-tag">C#</span>
+            <span class="proj-tag">Blender</span>
+            <span class="proj-tag">VR</span>
+            <span class="proj-tag">Meta Quest</span>
+            <span class="proj-tag">Serious Game</span>
+          </div>
+          <!--<a class="proj-link" href="https://github.com/elBarthos/REPO" target="_blank">GitHub &rarr;</a>-->
+        </div>
+
+        <div class="proj-item reveal">
+          <div class="proj-header">
+            <span class="proj-name">Serious Coffee - BA Projekt</span>
+            <span class="proj-status done">abgeschlossen</span>
+          </div>
+          <p class="proj-desc">
+            Game-Based-Learning Prototyp für das IPI Sonthofen — SPS-Programmierlogik spielerisch vermittelt über eine Café-Simulation mit virtueller Transferanlage.
+          </p>
+          <div class="proj-tags">
+            <span class="proj-tag">Unity</span>
+            <span class="proj-tag">C#</span>
+            <span class="proj-tag">Blender</span>
+            <span class="proj-tag">Serious Game</span>
+            <span class="proj-tag">Game Design</span>
+          </div>
+          <!--<a class="proj-link" href="https://github.com/elBarthos/REPO" target="_blank">GitHub &rarr;</a>-->
+        </div>
+
+        <div class="proj-item reveal">
+          <div class="proj-header">
+            <span class="proj-name">Fotobox v1</span>
+            <span class="proj-status done">abgeschlossen</span>
+          </div>
+          <p class="proj-desc">
+            Erste Version einer Raspberry Pi Fotobox mit direktem Cloud-Upload.
+          </p>
+          <div class="proj-tags">
+            <span class="proj-tag">Raspberry Pi</span>
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">Verteilte Systeme</span>
+            <span class="proj-tag">Web Applikation</span>
+          </div>
+          <a class="proj-link" href="https://www.elbarthos.de" target="_blank">www.elbarthos.de &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-index">04</span>
+        <h2>contact</h2>
+      </div>
+      <div class="contact-grid reveal">
+        <a class="contact-item" href="mailto:DEINE@MAIL.DE">
+          <p class="contact-label">Mail</p>
+          <p class="contact-value">tobias@elbarthos.de</p>
+        </a>
+        <a class="contact-item" href="https://linkedin.com/in/DEIN-LINKEDIN" target="_blank">
+          <p class="contact-label">LinkedIn</p>
+          <p class="contact-value">linkedin.com/in/elbarthos</p>
+        </a>
+        <a class="contact-item" href="https://elbarthos.de" target="_blank">
+          <p class="contact-label">ElBarthos Fotobox</p>
+          <p class="contact-value">elbarthos.de</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; width:100%;">
+      <span class="footer-mono">Tobias Barth — Kempten</span>
+      <span class="footer-mono">github.com/elBarthos</span>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
