@@ -10,57 +10,58 @@
 
   <style>
     :root {
-      --bg: #0a0e0c;
-      --bg-surface: #111612;
-      --bg-card: #141a16;
-      --accent: #1d9e75;
-      --accent-dim: #0f6e56;
-      --accent-bright: #5dcaa5;
-      --accent-glow: #1d9e7518;
-      --text: #e8ede9;
-      --text-secondary: #7a8f80;
-      --text-muted: #445049;
-      --border: #1e2a22;
-      --border-hover: #2a3d30;
+      --bg: #080c14;
+      --bg-card: #0d1220;
+      --bg-card-hover: #111828;
+      --accent: #4a9eff;
+      --accent-dim: #1a5fb4;
+      --accent-bright: #82beff;
+      --accent-glow: #4a9eff16;
+      --text: #e2eaf8;
+      --text-secondary: #6e87a8;
+      --text-muted: #334560;
+      --border: #182038;
+      --border-hover: #243060;
       --mono: 'DM Mono', monospace;
       --sans: 'DM Sans', sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
-      font-size: 15px;
-      line-height: 1.7;
+      font-size: 17px;
+      line-height: 1.75;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    /* noise overlay */
+    /* subtle grid background */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.4;
+      opacity: 0.25;
     }
 
-    /* ---- LAYOUT ---- */
     .container {
-      max-width: 760px;
+      max-width: 780px;
       margin: 0 auto;
       padding: 0 2rem;
       position: relative;
       z-index: 1;
     }
 
-    section { padding: 5rem 0; }
+    section { padding: 5.5rem 0; }
     section + section { border-top: 1px solid var(--border); }
 
     /* ---- NAV ---- */
@@ -72,10 +73,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #0a0e0ccc;
-      backdrop-filter: blur(12px);
+      background: #080c14e0;
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      transition: border-color 0.3s;
     }
 
     .nav-logo {
@@ -86,11 +86,7 @@
       text-decoration: none;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
 
     .nav-links a {
       font-family: var(--mono);
@@ -105,21 +101,7 @@
     .nav-links a:hover { color: var(--accent-bright); }
 
     /* ---- HERO ---- */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 0;
-      position: relative;
-    }
-
-    .hero-grid-line {
-      position: absolute;
-      left: 0; right: 0;
-      height: 1px;
-      background: var(--border);
-      pointer-events: none;
-    }
+    #hero { min-height: 100vh; display: flex; align-items: center; padding: 0; }
 
     .hero-content { padding: 8rem 0 5rem; }
 
@@ -127,7 +109,7 @@
       font-family: var(--mono);
       font-size: 11px;
       color: var(--accent);
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       margin-bottom: 1.5rem;
       display: flex;
@@ -138,85 +120,68 @@
     .hero-label::before {
       content: '';
       display: inline-block;
-      width: 24px;
+      width: 28px;
       height: 1px;
       background: var(--accent);
     }
 
     h1 {
       font-family: var(--sans);
-      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-size: clamp(2.8rem, 7vw, 4.4rem);
       font-weight: 300;
-      line-height: 1.1;
+      line-height: 1.08;
       letter-spacing: -0.03em;
       color: var(--text);
       margin-bottom: 1.5rem;
     }
 
-    h1 em {
-      font-style: normal;
-      color: var(--accent-bright);
-    }
+    h1 em { font-style: normal; color: var(--accent-bright); }
 
     .hero-sub {
-      font-size: 15px;
+      font-size: 16px;
       color: var(--text-secondary);
-      max-width: 480px;
-      line-height: 1.8;
+      max-width: 500px;
+      line-height: 1.85;
       margin-bottom: 2.5rem;
     }
 
-    .hero-links {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
+    .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 
     .btn-primary {
       font-family: var(--mono);
       font-size: 12px;
       letter-spacing: 0.06em;
-      padding: 0.65rem 1.4rem;
+      padding: 0.7rem 1.5rem;
       background: var(--accent);
-      color: #0a0e0c;
+      color: #080c14;
       border: none;
-      border-radius: 3px;
+      border-radius: 10px;
       text-decoration: none;
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
       font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
     }
 
-    .btn-primary:hover { background: var(--accent-bright); transform: translateY(-1px); }
+    .btn-primary:hover { background: var(--accent-bright); transform: translateY(-2px); }
 
     .btn-ghost {
       font-family: var(--mono);
       font-size: 12px;
       letter-spacing: 0.06em;
-      padding: 0.65rem 1.4rem;
+      padding: 0.7rem 1.5rem;
       background: transparent;
       color: var(--text-secondary);
       border: 1px solid var(--border-hover);
-      border-radius: 3px;
+      border-radius: 10px;
       text-decoration: none;
       cursor: pointer;
       transition: border-color 0.2s, color 0.2s, transform 0.15s;
     }
 
-    .btn-ghost:hover {
-      border-color: var(--accent-dim);
-      color: var(--accent-bright);
-      transform: translateY(-1px);
-    }
+    .btn-ghost:hover { border-color: var(--accent-dim); color: var(--accent-bright); transform: translateY(-2px); }
 
     /* ---- SECTION HEADERS ---- */
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-    }
+    .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; }
 
     .section-index {
       font-family: var(--mono);
@@ -235,9 +200,9 @@
 
     /* ---- ABOUT ---- */
     .about-text {
-      font-size: 15px;
+      font-size: 16px;
       color: var(--text-secondary);
-      max-width: 560px;
+      max-width: 580px;
       line-height: 1.9;
     }
 
@@ -256,7 +221,7 @@
       transition: gap 0.2s, color 0.2s;
     }
 
-    .cv-link:hover { gap: 0.85rem; color: var(--accent-bright); }
+    .cv-link:hover { gap: 0.9rem; color: var(--accent-bright); }
 
     /* ---- SKILLS ---- */
     .skills-block { margin-bottom: 2rem; }
@@ -265,71 +230,81 @@
       font-family: var(--mono);
       font-size: 10px;
       color: var(--text-muted);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 0.75rem;
     }
 
-    .skills-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .skills-row { display: flex; flex-wrap: wrap; gap: 8px; }
 
     .skill-tag {
       font-family: var(--mono);
       font-size: 12px;
-      padding: 4px 12px;
+      padding: 5px 14px;
       border: 1px solid var(--border);
-      border-radius: 2px;
+      border-radius: 10px;
       color: var(--text-secondary);
       background: var(--bg-card);
       transition: border-color 0.2s, color 0.2s;
     }
 
-    .skill-tag:hover {
-      border-color: var(--accent-dim);
-      color: var(--accent-bright);
-    }
+    .skill-tag:hover { border-color: var(--accent-dim); color: var(--accent-bright); }
 
     /* ---- PROJECTS ---- */
-    .projects-list { display: flex; flex-direction: column; gap: 1px; }
+    .projects-list { display: flex; flex-direction: column; gap: 12px; }
 
     .proj-item {
       border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.5rem;
-      background: var(--bg-card);
-      transition: border-color 0.25s, background 0.25s;
-      position: relative;
+      border-radius: 16px;
       overflow: hidden;
+      background: var(--bg-card);
+      transition: border-color 0.25s, background 0.25s, transform 0.2s;
     }
 
-    .proj-item::after {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 2px;
-      background: var(--accent);
-      transform: scaleY(0);
-      transform-origin: bottom;
-      transition: transform 0.25s ease;
+    .proj-item:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
     }
 
-    .proj-item:hover { border-color: var(--border-hover); background: #161d18; }
-    .proj-item:hover::after { transform: scaleY(1); }
+    .proj-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .proj-img-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #0d1220 0%, #111828 100%);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .proj-img-placeholder span {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .proj-body { padding: 1.5rem; }
 
     .proj-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 1rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
       flex-wrap: wrap;
     }
 
     .proj-name {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 500;
       color: var(--text);
       letter-spacing: -0.01em;
@@ -338,27 +313,23 @@
     .proj-status {
       font-family: var(--mono);
       font-size: 10px;
-      padding: 2px 8px;
-      border-radius: 2px;
+      padding: 3px 10px;
+      border-radius: 8px;
       letter-spacing: 0.06em;
       white-space: nowrap;
     }
 
-    .proj-status.active { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid #1d9e7533; }
-    .proj-status.done { background: #1a1a2e; color: #7f77dd; border: 1px solid #7f77dd33; }
+    .proj-status.active { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid #4a9eff33; }
+    .proj-status.done   { background: #1a1a2e; color: #8b82f0; border: 1px solid #8b82f033; }
 
     .proj-desc {
       font-size: 13px;
       color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 0.85rem;
+      line-height: 1.65;
+      margin-bottom: 1rem;
     }
 
-    .proj-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
     .proj-tag {
       font-family: var(--mono);
@@ -367,13 +338,13 @@
       letter-spacing: 0.05em;
     }
 
-    .proj-tag + .proj-tag::before { content: '·'; margin-right: 5px; }
+    .proj-tag + .proj-tag::before { content: '·'; margin-right: 6px; }
 
     .proj-link {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      margin-top: 0.75rem;
+      margin-top: 0.9rem;
       font-family: var(--mono);
       font-size: 11px;
       color: var(--accent-dim);
@@ -382,15 +353,15 @@
       transition: color 0.2s, gap 0.2s;
     }
 
-    .proj-link:hover { color: var(--accent-bright); gap: 0.65rem; }
+    .proj-link:hover { color: var(--accent-bright); gap: 0.7rem; }
 
     .projects-divider {
       font-family: var(--mono);
       font-size: 10px;
       color: var(--text-muted);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin: 2rem 0 1rem;
+      margin: 2.5rem 0 1rem;
     }
 
     /* ---- CONTACT ---- */
@@ -400,40 +371,36 @@
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 16px;
       overflow: hidden;
     }
 
     .contact-item {
       background: var(--bg-card);
-      padding: 1.5rem;
+      padding: 1.6rem;
       text-decoration: none;
       transition: background 0.2s;
       display: block;
     }
 
-    .contact-item:hover { background: #161d18; }
+    .contact-item:hover { background: var(--bg-card-hover); }
 
     .contact-label {
       font-family: var(--mono);
       font-size: 10px;
       color: var(--text-muted);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 0.4rem;
     }
 
-    .contact-value {
-      font-size: 14px;
-      color: var(--accent-bright);
-    }
+    .contact-value { font-size: 14px; color: var(--accent-bright); }
 
     /* ---- FOOTER ---- */
-    footer {
-      padding: 2.5rem 0;
-      border-top: 1px solid var(--border);
+    footer { padding: 2.5rem 0; border-top: 1px solid var(--border); }
+
+    .footer-inner {
       display: flex;
-      align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1rem;
@@ -448,30 +415,23 @@
 
     /* ---- ANIMATIONS ---- */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .fade-up {
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards;
-    }
-
-    .fade-up:nth-child(1) { animation-delay: 0.1s; }
-    .fade-up:nth-child(2) { animation-delay: 0.2s; }
-    .fade-up:nth-child(3) { animation-delay: 0.32s; }
-    .fade-up:nth-child(4) { animation-delay: 0.44s; }
+    .fade-up { opacity: 0; animation: fadeUp 0.65s ease forwards; }
+    .fade-up:nth-child(1) { animation-delay: 0.08s; }
+    .fade-up:nth-child(2) { animation-delay: 0.18s; }
+    .fade-up:nth-child(3) { animation-delay: 0.30s; }
+    .fade-up:nth-child(4) { animation-delay: 0.42s; }
 
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(22px);
       transition: opacity 0.55s ease, transform 0.55s ease;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ---- RESPONSIVE ---- */
     @media (max-width: 600px) {
@@ -479,18 +439,17 @@
       .nav-links { gap: 1.25rem; }
       .container { padding: 0 1.25rem; }
       section { padding: 3.5rem 0; }
-      .hero-content { padding: 6.5rem 0 3.5rem; }
+      .hero-content { padding: 7rem 0 3.5rem; }
     }
 
     @media (max-width: 420px) {
       .nav-links a { font-size: 10px; }
-      .nav-links { gap: 1rem; }
+      .nav-links { gap: 0.85rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#hero">elBarthos</a>
     <ul class="nav-links">
@@ -505,16 +464,14 @@
   <section id="hero">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-label fade-up">Master KI &amp; Computer Vision — HS Kempten</div>
-        <h1 class="fade-up">
-          Tobias<br><em>Barth</em>
-        </h1>
+        <div class="hero-label fade-up">M.Sc. — KI &amp; Computer Vision — HS Kempten</div>
+        <h1 class="fade-up">Tobias<br><em>Barth</em></h1>
         <p class="hero-sub fade-up">
-          ---
+          Master-Student an der HS Kempten. Fokus auf KI-Agenten, KI-gestützte Robotik und Game Engineering.
         </p>
         <div class="hero-links fade-up">
           <a class="btn-primary" href="#projects">Projekte ansehen</a>
-          <a class="btn-ghost" href="CV_LINK_HIER.pdf" target="_blank">Lebenslauf (PDF)</a>
+          <a class="btn-ghost" href="https://elBarthos.github.io/cv.pdf" target="_blank">Lebenslauf (PDF)</a>
         </div>
       </div>
     </div>
@@ -531,10 +488,9 @@
         Master-Student Informatik mit Schwerpunkt KI und Computer Vision an der Hochschule Kempten.
       </p>
       <p class="about-text reveal">
-        Neben dem Studium arbeite ich im Bereich KI-gestütztes Marketing und bringe
-        dort technisches Verständnis in strategische Kontexte ein.
+        Neben dem Studium unterstütze ich als Werkstudent bei AGCO Fendt KI-gestützte Projekte im Bereich Marketing.
       </p>
-      <a class="cv-link reveal" href="CV_LINK_HIER.pdf" target="_blank">
+      <a class="cv-link reveal" href="https://elBarthos.github.io/cv.pdf" target="_blank">
         Vollständiger Lebenslauf &rarr;
       </a>
     </div>
@@ -561,9 +517,9 @@
         <p class="skills-category">ML / CV</p>
         <div class="skills-row">
           <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">YOLO</span>
           <span class="skill-tag">Gemini API</span>
           <span class="skill-tag">Google ADK</span>
-          <span class="skill-tag">YOLO</span>
         </div>
       </div>
 
@@ -577,7 +533,7 @@
       </div>
 
       <div class="skills-block reveal">
-        <p class="skills-category">Tools &amp; Infra</p>
+        <p class="skills-category">Tools</p>
         <div class="skills-row">
           <span class="skill-tag">Unity</span>
           <span class="skill-tag">Blender</span>
@@ -598,38 +554,44 @@
       <div class="projects-list">
 
         <div class="proj-item reveal">
-          <div class="proj-header">
-            <span class="proj-name">Bullet Time Fotobox</span>
-            <span class="proj-status active">in progress</span>
+          <!-- Bild einfügen: <img class="proj-img" src="img/bullet-time.jpg" alt="Bullet Time Fotobox" /> -->
+          <div class="proj-img-placeholder"><span>img / bullet-time.jpg</span></div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-name">Bullet Time Fotobox</span>
+              <span class="proj-status active">in progress</span>
+            </div>
+            <p class="proj-desc">
+              Multi-Kamera-Setup auf Raspberry Pi Basis. Synchronisiertes Auslösen mehrerer Kameras,
+              automatische Bildverarbeitung und lokale Vorschau mit Bullet-Time-Effekt.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">Raspberry Pi</span>
+              <span class="proj-tag">Python</span>
+              <span class="proj-tag">Verteilte Systeme</span>
+              <span class="proj-tag">Architektur</span>
+            </div>
           </div>
-          <p class="proj-desc">
-            Multi-Kamera-Setup auf Raspberry Pi Basis. Synchronisiertes Auslösen mehrerer Kameras,
-            automatische Bildverarbeitung und lokale Vorschau mit Bullet-Time-Effekt.
-          </p>
-          <div class="proj-tags">
-            <span class="proj-tag">Raspberry Pi</span>
-            <span class="proj-tag">Python</span>
-            <span class="proj-tag">Verteilte Systeme</span>
-            <span class="proj-tag">Architektur</span>
-          </div>
-          <!--<a class="proj-link" href="https://github.com/elBarthos/REPO" target="_blank">GitHub &rarr;</a>-->
         </div>
 
         <div class="proj-item reveal">
-          <div class="proj-header">
-            <span class="proj-name">Vegan Wars</span>
-            <span class="proj-status active">in progress</span>
+          <!-- Bild einfügen: <img class="proj-img" src="img/vegan-wars.jpg" alt="Vegan Wars" /> -->
+          <div class="proj-img-placeholder"><span>img / vegan-wars.jpg</span></div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-name">Vegan Wars</span>
+              <span class="proj-status active">in progress</span>
+            </div>
+            <p class="proj-desc">
+              Tower-Defence-Game entwickelt in Unity als privates Indie-Projekt.
+              Fokus auf Gameplay-Loop und Level-Design.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">Unity</span>
+              <span class="proj-tag">C#</span>
+              <span class="proj-tag">Game Design</span>
+            </div>
           </div>
-          <p class="proj-desc">
-            Tower-Defence-Game entwickelt in Unity als privates Indie-Projekt.
-            Fokus auf Gameplay-Loop und Level-Design.
-          </p>
-          <div class="proj-tags">
-            <span class="proj-tag">Unity</span>
-            <span class="proj-tag">C#</span>
-            <span class="proj-tag">Game Design</span>
-          </div>
-          <!--<a class="proj-link" href="https://github.com/elBarthos/REPO" target="_blank">GitHub &rarr;</a>-->
         </div>
 
       </div>
@@ -639,57 +601,69 @@
       <div class="projects-list">
 
         <div class="proj-item reveal">
-          <div class="proj-header">
-            <span class="proj-name">VR-Lernspiels für Schüler*innen zur Förderung von Kompetenzen im Umgang mit einem Erste-Hilfe-Koffer</span>
-            <span class="proj-status done">abgeschlossen</span>
+          <!-- Bild einfügen: <img class="proj-img" src="img/vr-lernspiel.jpg" alt="VR-Lernspiel" /> -->
+          <div class="proj-img-placeholder"><span>img / vr-lernspiel.jpg</span></div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-name">VR-Lernspiel — Erste Hilfe</span>
+              <span class="proj-status done">abgeschlossen</span>
+            </div>
+            <p class="proj-desc">
+              Bachelorarbeit: Planung und Entwicklung eines VR-basierten Lernspiels für Schüler*innen
+              der Frank Hirschvogel Stiftung — Erste-Hilfe-Kompetenz spielerisch vermittelt auf der Meta Quest.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">Unity</span>
+              <span class="proj-tag">C#</span>
+              <span class="proj-tag">Blender</span>
+              <span class="proj-tag">VR</span>
+              <span class="proj-tag">Meta Quest</span>
+              <span class="proj-tag">Serious Game</span>
+            </div>
           </div>
-          <p class="proj-desc">
-            Bachelorarbeit: Planung und Erstellung eines VR-basierten Lernspiels, mit welchem Schüler*innen aus Partnerschulen der Frank Hirschvogel Stiftung den Inhalt und die Anwendung eines Erste-Hilfe-Koffers kennenlernen und so ihre Kompetenzen im Umgang mit diesem erweitern können.
-          </p>
-          <div class="proj-tags">
-            <span class="proj-tag">Unity</span>
-            <span class="proj-tag">C#</span>
-            <span class="proj-tag">Blender</span>
-            <span class="proj-tag">VR</span>
-            <span class="proj-tag">Meta Quest</span>
-            <span class="proj-tag">Serious Game</span>
-          </div>
-          <!--<a class="proj-link" href="https://github.com/elBarthos/REPO" target="_blank">GitHub &rarr;</a>-->
         </div>
 
         <div class="proj-item reveal">
-          <div class="proj-header">
-            <span class="proj-name">Serious Coffee - BA Projekt</span>
-            <span class="proj-status done">abgeschlossen</span>
+          <!-- Bild einfügen: <img class="proj-img" src="img/serious-coffee.jpg" alt="Serious Coffee" /> -->
+          <div class="proj-img-placeholder"><span>img / serious-coffee.jpg</span></div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-name">Serious Coffee</span>
+              <span class="proj-status done">abgeschlossen</span>
+            </div>
+            <p class="proj-desc">
+              Game-Based-Learning Prototyp für das IPI Sonthofen — SPS-Programmierlogik spielerisch
+              vermittelt über eine Café-Simulation mit virtueller Transferanlage.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">Unity</span>
+              <span class="proj-tag">C#</span>
+              <span class="proj-tag">Blender</span>
+              <span class="proj-tag">Serious Game</span>
+              <span class="proj-tag">Game Design</span>
+            </div>
           </div>
-          <p class="proj-desc">
-            Game-Based-Learning Prototyp für das IPI Sonthofen — SPS-Programmierlogik spielerisch vermittelt über eine Café-Simulation mit virtueller Transferanlage.
-          </p>
-          <div class="proj-tags">
-            <span class="proj-tag">Unity</span>
-            <span class="proj-tag">C#</span>
-            <span class="proj-tag">Blender</span>
-            <span class="proj-tag">Serious Game</span>
-            <span class="proj-tag">Game Design</span>
-          </div>
-          <!--<a class="proj-link" href="https://github.com/elBarthos/REPO" target="_blank">GitHub &rarr;</a>-->
         </div>
 
         <div class="proj-item reveal">
-          <div class="proj-header">
-            <span class="proj-name">Fotobox v1</span>
-            <span class="proj-status done">abgeschlossen</span>
+          <!-- Bild einfügen: <img class="proj-img" src="img/fotobox.jpg" alt="Fotobox v1" /> -->
+          <div class="proj-img-placeholder"><span>img / fotobox.jpg</span></div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-name">Fotobox v1</span>
+              <span class="proj-status done">abgeschlossen</span>
+            </div>
+            <p class="proj-desc">
+              Erste Version einer Raspberry Pi Fotobox mit direktem Cloud-Upload.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">Raspberry Pi</span>
+              <span class="proj-tag">Python</span>
+              <span class="proj-tag">Verteilte Systeme</span>
+              <span class="proj-tag">Web Applikation</span>
+            </div>
+            <a class="proj-link" href="https://www.elbarthos.de" target="_blank">www.elbarthos.de &rarr;</a>
           </div>
-          <p class="proj-desc">
-            Erste Version einer Raspberry Pi Fotobox mit direktem Cloud-Upload.
-          </p>
-          <div class="proj-tags">
-            <span class="proj-tag">Raspberry Pi</span>
-            <span class="proj-tag">Python</span>
-            <span class="proj-tag">Verteilte Systeme</span>
-            <span class="proj-tag">Web Applikation</span>
-          </div>
-          <a class="proj-link" href="https://www.elbarthos.de" target="_blank">www.elbarthos.de &rarr;</a>
         </div>
 
       </div>
@@ -704,16 +678,16 @@
         <h2>contact</h2>
       </div>
       <div class="contact-grid reveal">
-        <a class="contact-item" href="mailto:DEINE@MAIL.DE">
+        <a class="contact-item" href="mailto:tobias@elbarthos.de">
           <p class="contact-label">Mail</p>
           <p class="contact-value">tobias@elbarthos.de</p>
         </a>
-        <a class="contact-item" href="https://linkedin.com/in/DEIN-LINKEDIN" target="_blank">
+        <a class="contact-item" href="https://linkedin.com/in/elbarthos" target="_blank">
           <p class="contact-label">LinkedIn</p>
           <p class="contact-value">linkedin.com/in/elbarthos</p>
         </a>
         <a class="contact-item" href="https://elbarthos.de" target="_blank">
-          <p class="contact-label">ElBarthos Fotobox</p>
+          <p class="contact-label">Fotobox</p>
           <p class="contact-value">elbarthos.de</p>
         </a>
       </div>
@@ -722,17 +696,21 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="container" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; width:100%;">
-      <span class="footer-mono">Tobias Barth — Kempten</span>
-      <span class="footer-mono">github.com/elBarthos</span>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-mono">Tobias Barth — Kempten</span>
+        <span class="footer-mono">github.com/elBarthos</span>
+      </div>
     </div>
   </footer>
 
   <script>
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      }),
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     );
     reveals.forEach(el => observer.observe(el));
   </script>
