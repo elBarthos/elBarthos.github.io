@@ -146,10 +146,17 @@
 
   /* ── RECHTE SPALTE ─────────────────────────── */
   .right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .right-col .section {
     background: white;
     border-radius: 14px;
     padding: 20px 22px;
     box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    margin-bottom: 0;
   }
 
   .section { margin-bottom: 18px; }
@@ -339,8 +346,6 @@
       </div>
     </div>
   </section>
-</div>
-<div class="right-col">
   <section class="section">
     <div class="section-title">Berufliche Praxis</div>
 
