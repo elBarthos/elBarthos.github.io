@@ -492,6 +492,239 @@
       .nav-links { gap: 0.85rem; }
     }
 
+    /* ---- MEHR INFOS BUTTON ---- */
+    .btn-mehr {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.9rem;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      background: var(--accent-glow);
+      border: 1px solid #4a9eff2a;
+      border-radius: 8px;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn-mehr:hover { background: #4a9eff22; border-color: var(--accent-dim); color: var(--accent-bright); }
+
+    /* ---- MODAL OVERLAY ---- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 12, 20, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hover);
+      border-radius: 20px;
+      max-width: 740px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+      transform: translateY(24px) scale(0.98);
+      transition: transform 0.28s ease;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-hover) transparent;
+    }
+    .modal-backdrop.open .modal-card { transform: translateY(0) scale(1); }
+
+    .modal-top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      display: flex;
+      justify-content: flex-end;
+      padding: 1rem 1rem 0;
+      background: var(--bg-card);
+    }
+    .modal-close {
+      background: var(--bg);
+      border: 1px solid var(--border-hover);
+      color: var(--text-secondary);
+      border-radius: 8px;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--text); border-color: var(--accent-dim); }
+
+    .modal-content { padding: 0 2rem 2rem; }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.02em;
+    }
+    .modal-subtitle {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+    .modal-section {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 1.6rem 0 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    .modal-list {
+      list-style: none;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .modal-list li { display: flex; gap: 0.6rem; }
+    .modal-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+
+    .modal-img-hero {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      margin: 1rem 0;
+      max-height: 280px;
+    }
+    .modal-imgs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 1rem 0;
+    }
+    .modal-imgs img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      aspect-ratio: 16/9;
+    }
+    .modal-imgs.three { grid-template-columns: 1fr 1fr 1fr; }
+    .modal-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 1rem;
+    }
+    .modal-pill {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 3px 11px;
+      border: 1px solid #4a9eff2a;
+      border-radius: 8px;
+      color: var(--accent-bright);
+      background: var(--accent-glow);
+    }
+    .modal-arch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 0.75rem 0;
+    }
+    .modal-arch-tile {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+    }
+    .modal-arch-tile .mat-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+    .modal-arch-tile .mat-val {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+    .modal-pipeline {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+      margin: 1rem 0;
+    }
+    .pipeline-step {
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      padding: 0.65rem 0.9rem;
+      text-align: center;
+      flex: 1;
+      min-width: 80px;
+    }
+    .pipeline-step .ps-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 600;
+      display: block;
+    }
+    .pipeline-step .ps-sub {
+      font-size: 11px;
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 2px;
+    }
+    .pipeline-arrow {
+      color: var(--accent-dim);
+      font-size: 18px;
+      padding: 0 0.3rem;
+      flex-shrink: 0;
+    }
+    @media (max-width: 600px) {
+      .modal-imgs { grid-template-columns: 1fr; }
+      .modal-arch-grid { grid-template-columns: 1fr; }
+      .modal-content { padding: 0 1.25rem 1.5rem; }
+      .modal-pipeline { flex-direction: column; }
+      .pipeline-arrow { transform: rotate(90deg); }
+    }
+
     .share-card {
     display: flex;
     align-items: center;
@@ -545,7 +778,10 @@
     <div class="container">
       <div class="hero-content">
         <div class="hero-inner">
-          <img class="hero-photo" src="img/foto.png" alt="Tobias Barth" />
+          <picture>
+            <source srcset="img/foto.webp" type="image/webp" />
+            <img class="hero-photo" src="img/foto.png" alt="Tobias Barth" />
+          </picture>
           <div class="hero-text">
             <div class="hero-label fade-up">M.Sc. — KI &amp; Computer Vision — HS Kempten</div>
             <h1 class="fade-up">Tobias<br><em>Barth</em></h1>
@@ -554,7 +790,7 @@
             </p>
             <div class="hero-links fade-up">
               <a class="btn-primary" href="#projects">Projekte ansehen</a>
-              <a class="btn-ghost" href="https://elBarthos.github.io/cv.html" target="_blank">Lebenslauf (html/pdf)</a>
+              <a class="btn-ghost" href="https://elBarthos.github.io/cv.html" target="_blank">Lebenslauf</a>
             </div>
           </div>
         </div>
@@ -575,8 +811,8 @@
       <p class="about-text reveal">
         Neben dem Studium unterstütze ich als Werkstudent bei AGCO Fendt KI-gestützte Projekte im Bereich Marketing.
       </p>
-      <a class="cv-link reveal" href="https://elBarthos.github.io/cv.pdf" target="_blank">
-        Vollständiger Lebenslauf (PDF Download) &rarr;
+      <a class="cv-link reveal" href="https://elBarthos.github.io/cv.html" target="_blank">
+        Lebenslauf &rarr;
       </a>
     </div>
   </section>
@@ -659,6 +895,7 @@
               <span class="proj-tag">Isaac Sim</span>
               <span class="proj-tag">Computer Vision</span>
             </div>
+            <button class="btn-mehr" onclick="openModal('modal-robo')">Mehr Infos →</button>
           </div>
         </div>
 
@@ -728,6 +965,7 @@
               <span class="proj-tag">Meta Quest</span>
               <span class="proj-tag">Serious Game</span>
             </div>
+            <button class="btn-mehr" onclick="openModal('modal-vr')">Mehr Infos →</button>
           </div>
         </div>
 
@@ -768,7 +1006,10 @@
               <span class="proj-tag">Verteilte Systeme</span>
               <span class="proj-tag">Web Applikation</span>
             </div>
-            <a class="proj-link" href="https://www.elbarthos.de" target="_blank">www.elbarthos.de &rarr;</a>
+            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+              <button class="btn-mehr" onclick="openModal('modal-fotobox')">Mehr Infos →</button>
+              <a class="proj-link" href="https://www.elbarthos.de" target="_blank">www.elbarthos.de &rarr;</a>
+            </div>
           </div>
         </div>
 
@@ -846,6 +1087,214 @@
   </div>
 </section>
 
+  <!-- ====================================================
+       MODALS
+  ===================================================== -->
+
+  <!-- MODAL: Supermarktroboter / RoboCup -->
+  <div class="modal-backdrop" id="modal-robo" role="dialog" aria-modal="true" aria-labelledby="modal-robo-title">
+    <div class="modal-card">
+      <div class="modal-top-bar">
+        <button class="modal-close" onclick="closeModal('modal-robo')" aria-label="Schließen">✕</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-subtitle">RoboCup@Work · HS Kempten · SS 2026</p>
+        <h3 class="modal-title" id="modal-robo-title">Supermarktroboter — High Level Action Planning</h3>
+
+        <img class="modal-img-hero" src="img/robocup.jpg" alt="Franka Panda Roboterarm" loading="lazy" />
+
+        <p class="modal-section">Projektbeschreibung</p>
+        <p class="modal-text">
+          Hochschulteam-Projekt im Rahmen des RoboCup@Work-Wettbewerbs: Ein Franka Panda Roboterarm
+          soll eigenständig Supermarktregale einräumen und Produkte nach Mindesthaltbarkeitsdatum sortieren.
+          Das High-Level-Team ist verantwortlich für den gesamten Planungs- und Ausführungsstack —
+          von der natürlichsprachigen Nutzereingabe bis zum konkreten ROS2-Befehl an den Arm.
+        </p>
+
+        <p class="modal-section">Technische Architektur</p>
+        <div class="modal-pipeline">
+          <div class="pipeline-step">
+            <span class="ps-label">Sprach&shy;eingabe</span>
+            <span class="ps-sub">natürlichsprachig</span>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">
+            <span class="ps-label">LLM Planner</span>
+            <span class="ps-sub">Ollama · JSON</span>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">
+            <span class="ps-label">BT Builder</span>
+            <span class="ps-sub">py_trees</span>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">
+            <span class="ps-label">ROS2 Runner</span>
+            <span class="ps-sub">Action Server</span>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">
+            <span class="ps-label">Roboterarm</span>
+            <span class="ps-sub">Franka Panda</span>
+          </div>
+        </div>
+        <p class="modal-text" style="margin-top:0.75rem;">
+          Basis ist eine <strong style="color:var(--text)">hexagonale Architektur</strong> (Ports &amp; Adapters):
+          Der Core kennt kein Framework — LLM, BT-Engine, ROS2 und WebUI sind vollständig austauschbar.
+          Die WebUI (FastAPI + WebSocket) erlaubt Echtzeit-Monitoring des laufenden Behaviour Trees.
+        </p>
+
+        <p class="modal-section">Meine Aufgaben</p>
+        <ul class="modal-list">
+          <li>GitHub-Ordnerstruktur aufgebaut und Issues für das Team koordiniert</li>
+          <li>Hexagonale Architektur (Ports &amp; Adapters) konzipiert und implementiert</li>
+          <li>Initialen BT-Runner Adapter erstellt — py_trees + rclpy Integration</li>
+          <li>WebUI entwickelt: FastAPI + WebSocket für Echtzeit-Monitoring des Behaviour Trees</li>
+          <li>Migration auf GPU-Server per Docker für lokale Ollama-Inferenz</li>
+          <li>Mock-Action-Server für ROS2-Tests ohne physische Hardware erstellt</li>
+          <li>UML-Diagramme, Poster und Präsentation für den Wettbewerb erstellt</li>
+          <li>Logistik: Beschaffung des Supermarktregals für das Testsetup</li>
+        </ul>
+
+        <div class="modal-pills">
+          <span class="modal-pill">Python</span>
+          <span class="modal-pill">ROS2</span>
+          <span class="modal-pill">py_trees</span>
+          <span class="modal-pill">Ollama</span>
+          <span class="modal-pill">FastAPI</span>
+          <span class="modal-pill">WebSocket</span>
+          <span class="modal-pill">Docker</span>
+          <span class="modal-pill">Hexagonale Architektur</span>
+          <span class="modal-pill">UML</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Fotobox v1 -->
+  <div class="modal-backdrop" id="modal-fotobox" role="dialog" aria-modal="true" aria-labelledby="modal-fotobox-title">
+    <div class="modal-card">
+      <div class="modal-top-bar">
+        <button class="modal-close" onclick="closeModal('modal-fotobox')" aria-label="Schließen">✕</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-subtitle">Python · PySide6 · QML · Raspberry Pi · SFTP</p>
+        <h3 class="modal-title" id="modal-fotobox-title">Raspberry Pi Fotobox</h3>
+
+        <img class="modal-img-hero" src="img/fotobox-aufgebaut.webp" alt="Fotobox aufgebaut" loading="lazy" style="object-fit:contain;max-height:420px;background:transparent;" />
+
+        <p class="modal-section">Überblick</p>
+        <p class="modal-text">
+          Vollständige Event-Fotobox auf Basis eines Raspberry Pi mit 10"-Touchscreen.
+          Die Anwendung läuft als Vollbild-Qt/QML-Oberfläche direkt auf dem Pi, bedient die Kamera,
+          zeigt einen Live-Stream an, löst auf Knopfdruck aus, präsentiert das Ergebnis kurz auf
+          dem Display und schiebt es im Hintergrund per SFTP auf den Webserver.
+          Gäste scannen einen QR-Code und gelangen direkt zur passwortgeschützten Web-Galerie.
+        </p>
+
+        <p class="modal-section">Features</p>
+        <div class="modal-arch-grid">
+          <div class="modal-arch-tile">
+            <p class="mat-label">Kamera-Backends</p>
+            <p class="mat-val">DSLR via gphoto2 (Canon, Nikon u.a.) oder PiCamera2 — wird beim Start automatisch erkannt.</p>
+          </div>
+          <div class="modal-arch-tile">
+            <p class="mat-label">Live-Stream &amp; Countdown</p>
+            <p class="mat-val">Kontinuierliche Vorschau im Vollbild. Konfigurierbarer Countdown vor der Aufnahme.</p>
+          </div>
+          <div class="modal-arch-tile">
+            <p class="mat-label">Post-Processing</p>
+            <p class="mat-val">Event-Logo oder Rahmen wird automatisch als Overlay auf jedes Foto gelegt.</p>
+          </div>
+          <div class="modal-arch-tile">
+            <p class="mat-label">SFTP-Upload &amp; Galerie</p>
+            <p class="mat-val">Upload im Hintergrund mit Retry-Logik. QR-Code führt Gäste direkt zur Login-Seite der Galerie.</p>
+          </div>
+        </div>
+
+        <p class="modal-section">Bedienung &amp; Verwaltung</p>
+        <p class="modal-text">
+          Ein versteckter Button in der oberen Ecke öffnet das Settings-Menü — dort lassen sich
+          Kameraparameter, Speicherpfad und SFTP-Zugangsdaten direkt auf dem Gerät anpassen.
+          Per SSH können Updates eingespielt, Logs eingesehen und der Service neugestartet werden,
+          ohne die Box physisch anfassen zu müssen.
+        </p>
+
+        <div class="modal-pills">
+          <span class="modal-pill">Python</span>
+          <span class="modal-pill">PySide6</span>
+          <span class="modal-pill">QML</span>
+          <span class="modal-pill">gphoto2</span>
+          <span class="modal-pill">PiCamera2</span>
+          <span class="modal-pill">SFTP</span>
+          <span class="modal-pill">Raspberry Pi</span>
+          <span class="modal-pill">Embedded Linux</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: VR-Lernspiel -->
+  <div class="modal-backdrop" id="modal-vr" role="dialog" aria-modal="true" aria-labelledby="modal-vr-title">
+    <div class="modal-card">
+      <div class="modal-top-bar">
+        <button class="modal-close" onclick="closeModal('modal-vr')" aria-label="Schließen">✕</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-subtitle">Bachelorarbeit · Unity · C# · Blender · Meta Quest 2</p>
+        <h3 class="modal-title" id="modal-vr-title">VR-Lernspiel — Erste Hilfe</h3>
+
+        <div class="modal-imgs">
+          <img src="img/vr_lernspiel/quest.webp" alt="VR-Setup mit Meta Quest 2" loading="lazy" />
+          <img src="img/vr_lernspiel/szenarien.webp" alt="Szenarien-Übersicht im Spiel" loading="lazy" />
+          <img src="img/vr_lernspiel/koffer_holen.webp" alt="Gameplay: Erste-Hilfe-Koffer holen" loading="lazy" />
+          <img src="img/vr_lernspiel/dialog.webp" alt="Dialogsystem im Spiel" loading="lazy" />
+        </div>
+
+        <p class="modal-section">Ziel der Bachelorarbeit</p>
+        <p class="modal-text">
+          Planung und Entwicklung eines VR-basierten Lernspiels für Schüler*innen aus Partnerschulen
+          der Frank Hirschvogel Stiftung. Ziel war es, Inhalt und Anwendung eines Erste-Hilfe-Koffers
+          (DIN 13157) spielerisch zu vermitteln und die Handlungskompetenz der Lernenden zu stärken.
+          Mit Hilfe der Bloom-Taxonomie und dem subjektwissenschaftlichen Ansatz wurden klare Lernziele
+          definiert und in interaktive Spielszenarien überführt.
+        </p>
+
+        <p class="modal-section">Mein Beitrag</p>
+        <ul class="modal-list">
+          <li>Didaktisches Konzept erarbeitet: Lernzieldefinition nach Bloom-Taxonomie</li>
+          <li>Storyboard und vollständiges Leveldesign entworfen</li>
+          <li>Alle 3D-Modelle der Erste-Hilfe-Materialien in Blender modelliert</li>
+          <li>Farbkonzept für die gesamte Anwendung entwickelt</li>
+          <li>Spielmechaniken in Unity (C#) implementiert: Greifen, Ablegen, Sequenzprüfung</li>
+          <li>Meta XR All-in-One SDK integriert: Hand Tracking, Grab &amp; Ray Interactors</li>
+          <li>Deployment und Testing auf Meta Quest 2 Headsets</li>
+        </ul>
+
+        <p class="modal-section">Inhalte des Lernspiels</p>
+        <img class="modal-img-hero" src="img/vr_lernspiel/koffer_einraeumen.webp" alt="Erste-Hilfe-Koffer einräumen" loading="lazy" style="max-height:200px;" />
+        <p class="modal-text">
+          Das Spiel führt Schüler*innen schrittweise durch realistische Notfallszenarien — vom Erkennen
+          der Situation über das Holen des Erste-Hilfe-Koffers bis zum korrekten Einräumen der
+          Materialien. Ein Dialogsystem gibt kontextsensibles Feedback, eine Informationsebene
+          erklärt Verwendungszweck und Anwendung jedes Hilfsmittels.
+        </p>
+
+        <div class="modal-pills">
+          <span class="modal-pill">Unity</span>
+          <span class="modal-pill">C#</span>
+          <span class="modal-pill">Blender</span>
+          <span class="modal-pill">Meta XR SDK</span>
+          <span class="modal-pill">Meta Quest 2</span>
+          <span class="modal-pill">Serious Game Design</span>
+          <span class="modal-pill">Bloom-Taxonomie</span>
+          <span class="modal-pill">3D-Modellierung</span>
+          <span class="modal-pill">Leveldesign</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <div class="container">
@@ -866,12 +1315,39 @@
     );
     reveals.forEach(el => observer.observe(el));
     new QRCode(document.getElementById("qr-canvas"), {
-    text: "https://elbarthos.github.io",
-    width: 160,
-    height: 160,
-    colorDark: "#e2eaf8",
-    colorLight: "#0d1220",
-    correctLevel: QRCode.CorrectLevel.H
+      text: "https://elbarthos.github.io",
+      width: 160,
+      height: 160,
+      colorDark: "#e2eaf8",
+      colorLight: "#0d1220",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    // ---- Modal logic ----
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      el.querySelector('.modal-card').scrollTop = 0;
+    }
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    // Close on backdrop click
+    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+      backdrop.addEventListener('click', e => {
+        if (e.target === backdrop) closeModal(backdrop.id);
+      });
+    });
+    // Close on ESC
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-backdrop.open').forEach(el => closeModal(el.id));
+      }
     });
   </script>
 
