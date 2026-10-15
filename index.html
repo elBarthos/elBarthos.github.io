@@ -4,6 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tobias Barth</title>
+  <meta name="description" content="Tobias Barth, Software Engineer mit Fokus auf KI für Robotik. Master-Student KI &amp; Computer Vision an der Hochschule Kempten, verfügbar ab April 2027." />
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:url" content="https://elbarthos.github.io/" />
+  <meta property="og:title" content="Tobias Barth — Portfolio" />
+  <meta property="og:description" content="Software Engineer mit Fokus auf KI für Robotik. Master-Student KI &amp; Computer Vision an der Hochschule Kempten, verfügbar ab April 2027." />
+  <meta property="og:image" content="https://elbarthos.github.io/img/og-image.jpg" />
+  <meta property="og:image:width" content="400" />
+  <meta property="og:image:height" content="400" />
+  <meta property="og:image:alt" content="Porträt von Tobias Barth" />
+  <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
@@ -312,6 +325,77 @@
       justify-content: center;
     }
 
+    .proj-schema {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(135deg, #0d1220 0%, #111828 100%);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .bt-node {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text);
+      background: var(--bg-card);
+      border: 1px solid var(--border-hover);
+      border-radius: 8px;
+      padding: 0.5rem 0.9rem;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .bt-node small {
+      display: block;
+      font-size: 9px;
+      color: var(--text-secondary);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .bt-node.vla { border-color: #4a9eff66; color: var(--accent-bright); }
+    .bt-node.classic { border-color: #8b82f066; color: #b3acf7; }
+    .bt-root { position: relative; margin-bottom: 40px; }
+    .bt-root::after,
+    .bt-children .bt-node::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 1px;
+      height: 20px;
+      background: var(--border-hover);
+    }
+    .bt-root::after { top: 100%; }
+    .bt-children {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: min(480px, 100%);
+    }
+    .bt-children::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 16.667%;
+      right: 16.667%;
+      height: 1px;
+      background: var(--border-hover);
+    }
+    .bt-children .bt-node { position: relative; margin: 0 0.4rem; }
+    .bt-children .bt-node::before { bottom: 100%; }
+    .bt-caption {
+      margin-top: 1.5rem;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    @media (max-width: 500px) {
+      .bt-node { font-size: 11px; padding: 0.45rem 0.5rem; }
+    }
+
     .proj-img-placeholder span {
       font-family: var(--mono);
       font-size: 10px;
@@ -349,6 +433,7 @@
 
     .proj-status.active { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid #4a9eff33; }
     .proj-status.done   { background: #1a1a2e; color: #8b82f0; border: 1px solid #8b82f033; }
+    .proj-status.private { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-hover); }
 
     .proj-desc {
       font-size: 13px;
@@ -725,39 +810,6 @@
       .pipeline-arrow { transform: rotate(90deg); }
     }
 
-    .share-card {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2.5rem;
-    max-width: 480px;
-    }
-    .share-qr canvas { border-radius: 8px; }
-    .share-info { display: flex; flex-direction: column; gap: 0.4rem; }
-    .share-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--text-muted);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .share-url {
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--accent-bright);
-      margin-bottom: 0.25rem;
-    }
-    .share-hint {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
-    }
-    @media (max-width: 500px) {
-      .share-card { flex-direction: column; gap: 2rem; align-items: flex-start; }
-    }
   </style>
 </head>
 <body>
@@ -765,11 +817,10 @@
   <nav>
     <a class="nav-logo" href="#hero">elBarthos</a>
     <ul class="nav-links">
-      <li><a href="#about">about</a></li>
+      <li><a href="#about">über mich</a></li>
       <li><a href="#skills">skills</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#contact">contact</a></li>
-      <li><a href="#share">share</a></li>
+      <li><a href="#projects">projekte</a></li>
+      <li><a href="#contact">kontakt</a></li>
     </ul>
   </nav>
 
@@ -783,10 +834,11 @@
             <img class="hero-photo" src="img/foto.png" alt="Tobias Barth" />
           </picture>
           <div class="hero-text">
-            <div class="hero-label fade-up">M.Sc. — KI &amp; Computer Vision — HS Kempten</div>
+            <div class="hero-label fade-up">Master-Student · KI &amp; Computer Vision</div>
             <h1 class="fade-up">Tobias<br><em>Barth</em></h1>
             <p class="hero-sub fade-up">
-              Master-Student an der HS Kempten. Fokus auf KI-Agenten, KI-gestützte Robotik und Game Engineering.
+              Software Engineer mit Fokus auf KI für Robotik. Aktuell Masterarbeit zu
+              Vision-Language-Action-Modellen in Behaviour-Tree-Architekturen.
             </p>
             <div class="hero-links fade-up">
               <a class="btn-primary" href="#projects">Projekte ansehen</a>
@@ -803,13 +855,28 @@
     <div class="container">
       <div class="section-header reveal">
         <span class="section-index">01</span>
-        <h2>about</h2>
+        <h2>über mich</h2>
       </div>
       <p class="about-text reveal">
-        Master-Student Informatik mit Schwerpunkt KI und Computer Vision an der Hochschule Kempten.
+        Ich studiere Künstliche Intelligenz und Computer Vision an der Hochschule Kempten (Abschluss vsl. März 2027).
+        In meiner Masterarbeit untersuche ich, wie sich Vision-Language-Action-Modelle als Skills in eine hybride
+        Behaviour-Tree-Architektur einbinden lassen – am Beispiel eines Supermarktroboters, der auf Sprachbefehl
+        Regale ein- und ausräumen soll.
       </p>
       <p class="about-text reveal">
-        Neben dem Studium unterstütze ich als Werkstudent bei AGCO Fendt KI-gestützte Projekte im Bereich Marketing.
+        Mein Weg dorthin führte über die Hardware: Nach der Ausbildung zum Elektroniker für Geräte und Systeme habe ich
+        gut sieben Jahre bei Rohde &amp; Schwarz Leiterplatten konstruiert und berufsbegleitend den staatlich geprüften
+        Techniker gemacht. Danach folgte der Bachelor Informatik – Game Engineering. Seit Studienbeginn werde ich als
+        Stipendiat von der Hans-Böckler-Stiftung gefördert.
+      </p>
+      <p class="about-text reveal">
+        Zuletzt war ich Werkstudent bei AGCO Fendt im Bereich Marketing Technologies: Dort habe ich eine Sprachsteuerung
+        für einen GenAI-Chatassistenten prototypisch umgesetzt (Google ADK, Gemini) und eine automatisierte
+        Datenvalidierung zwischen Produktkonfigurator und SAP konzipiert und entwickelt. In der AGCO Fendt AI Challenge
+        habe ich außerdem im Team ein YOLO-Modell auf die Erkennung von Zuckerrüben nachtrainiert.
+      </p>
+      <p class="about-text reveal">
+        Ab April 2027 suche ich eine Stelle im Bereich KI und Robotik – bevorzugt im Allgäu, gerne auch hybrid.
       </p>
       <a class="cv-link reveal" href="https://elBarthos.github.io/cv.html" target="_blank">
         Lebenslauf &rarr;
@@ -826,39 +893,65 @@
       </div>
 
       <div class="skills-block reveal">
-        <p class="skills-category">Sprachen</p>
+        <p class="skills-category">Programmierung</p>
         <div class="skills-row">
           <span class="skill-tag">Python</span>
-          <span class="skill-tag">C++</span>
           <span class="skill-tag">C#</span>
         </div>
       </div>
 
       <div class="skills-block reveal">
-        <p class="skills-category">ML / CV</p>
+        <p class="skills-category">Robotik</p>
         <div class="skills-row">
-          <span class="skill-tag">PyTorch</span>
-          <span class="skill-tag">YOLO</span>
-          <span class="skill-tag">Gemini API</span>
-          <span class="skill-tag">Google ADK</span>
+          <span class="skill-tag">ROS2</span>
+          <span class="skill-tag">Behaviour Trees (py_trees)</span>
         </div>
       </div>
 
       <div class="skills-block reveal">
-        <p class="skills-category">Robotics / Embedded</p>
+        <p class="skills-category">KI / ML</p>
         <div class="skills-row">
-          <span class="skill-tag">ROS2</span>
+          <span class="skill-tag">Google ADK</span>
+          <span class="skill-tag">Gemini API</span>
+          <span class="skill-tag">Semantic Search</span>
+          <span class="skill-tag">YOLO</span>
+        </div>
+      </div>
+
+      <div class="skills-block reveal">
+        <p class="skills-category">Software Engineering</p>
+        <div class="skills-row">
+          <span class="skill-tag">Hexagonale Architektur</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Playwright</span>
+          <span class="skill-tag">Pandas</span>
+        </div>
+      </div>
+
+      <div class="skills-block reveal">
+        <p class="skills-category">Hardware &amp; Embedded</p>
+        <div class="skills-row">
           <span class="skill-tag">Raspberry Pi</span>
+          <span class="skill-tag">Arduino</span>
           <span class="skill-tag">Linux</span>
         </div>
       </div>
 
       <div class="skills-block reveal">
-        <p class="skills-category">Tools</p>
+        <p class="skills-category">Game &amp; 3D</p>
         <div class="skills-row">
           <span class="skill-tag">Unity</span>
           <span class="skill-tag">Blender</span>
-          <span class="skill-tag">Photoshop</span>
+        </div>
+      </div>
+
+      <div class="skills-block reveal">
+        <p class="skills-category">Grundkenntnisse</p>
+        <div class="skills-row">
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">PyTorch</span>
         </div>
       </div>
     </div>
@@ -869,77 +962,97 @@
     <div class="container">
       <div class="section-header reveal">
         <span class="section-index">03</span>
-        <h2>projects</h2>
+        <h2>projekte</h2>
       </div>
 
       <div class="projects-list">
 
         <div class="proj-item reveal">
-          <img class="proj-img" src="img/robocup.jpg" alt="RoboCup Supermarktroboter" />
+          <div class="proj-schema" aria-hidden="true">
+            <div class="bt-node bt-root">Behaviour Tree<small>Sequenz</small></div>
+            <div class="bt-children">
+              <div class="bt-node vla">Greifen<small>VLA-Skill</small></div>
+              <div class="bt-node classic">Transport<small>MoveIt</small></div>
+              <div class="bt-node vla">Ablegen<small>VLA-Skill</small></div>
+            </div>
+            <p class="bt-caption">Schema · Abgabe vsl. März 2027</p>
+          </div>
           <div class="proj-body">
             <div class="proj-header">
-              <span class="proj-name">Supermarktroboter — HS Kempten</span>
+              <span class="proj-name">Masterarbeit — VLA-Skills in Behaviour Trees</span>
+              <span class="proj-status active">in Arbeit</span>
+            </div>
+            <p class="proj-desc">
+              Hybrider Ansatz für einen Supermarktroboter: Gelernte Vision-Language-Action-Modelle übernehmen
+              Greifen und Ablegen, klassische Bewegungsplanung mit MoveIt den Transport – beide als austauschbare
+              Knoten in einer Behaviour-Tree-Architektur. Baut auf dem Supermarktroboter-Projekt auf.
+            </p>
+            <div class="proj-tags">
+              <span class="proj-tag">VLA</span>
+              <span class="proj-tag">LoRA</span>
+              <span class="proj-tag">ROS2</span>
+              <span class="proj-tag">MoveIt</span>
+              <span class="proj-tag">Behaviour Trees</span>
+              <span class="proj-tag">Sim-to-Real</span>
+            </div>
+            <button class="btn-mehr" onclick="openModal('modal-thesis')">Mehr Infos →</button>
+          </div>
+        </div>
+
+        <div class="proj-item reveal">
+          <img class="proj-img" src="img/robocup.webp" alt="RoboCup Supermarktroboter" loading="lazy" />
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-name">Supermarktroboter — RoboCup@Work</span>
               <span class="proj-status done">abgeschlossen</span>
             </div>
             <p class="proj-desc">
-              Team-Projekt im Rahmen von RoboCup@Work: Ein Franka Panda Roboterarm räumt selbstständig
-              Supermarktregale aus und sortiert Produkte nach Mindesthaltbarkeitsdatum.
-              Sprachsteuerung via LLM, High-Level-Planung mit Behaviour Trees, Ausführung über ROS2.
+              Masterprojekt im Team: Ziel war ein Franka Panda Roboterarm, der auf Sprachbefehl Supermarktregale
+              ein- und ausräumt und Produkte nach Mindesthaltbarkeitsdatum sortiert. Im High-Level-Team habe ich die
+              hexagonale Architektur, die Ausführung der Behaviour Trees über ROS2 und eine Live-WebUI umgesetzt –
+              getestet gegen einen Mock-Action-Server.
+              Wird in meiner Masterarbeit fortgeführt.
             </p>
             <div class="proj-tags">
               <span class="proj-tag">ROS2</span>
               <span class="proj-tag">Python</span>
-              <span class="proj-tag">LLM</span>
+              <span class="proj-tag">py_trees</span>
               <span class="proj-tag">Behaviour Trees</span>
-              <span class="proj-tag">Franka Panda</span>
-              <span class="proj-tag">Isaac Sim</span>
-              <span class="proj-tag">Computer Vision</span>
+              <span class="proj-tag">Hexagonale Architektur</span>
+              <span class="proj-tag">FastAPI</span>
+              <span class="proj-tag">Docker</span>
             </div>
             <button class="btn-mehr" onclick="openModal('modal-robo')">Mehr Infos →</button>
           </div>
         </div>
 
         <div class="proj-item reveal">
-          <img class="proj-img" src="img/bullet-time.jpg" alt="Bullet Time Fotobox" />
+          <img class="proj-img" src="img/fotobox.webp" alt="Fotobox im Einsatz" loading="lazy" />
           <div class="proj-body">
             <div class="proj-header">
-              <span class="proj-name">Bullet Time Fotobox</span>
-              <span class="proj-status active">in progress</span>
+              <span class="proj-name">Fotobox</span>
+              <span class="proj-status active">aktiv</span>
             </div>
             <p class="proj-desc">
-              Multi-Kamera-Setup auf Raspberry Pi Basis. Synchronisiertes Auslösen mehrerer Kameras,
-              automatische Bildverarbeitung und lokale Vorschau mit Bullet-Time-Effekt.
+              Raspberry Pi Fotobox mit direktem Cloud-Upload, seit 2018 weiterentwickelt und auf rund 30
+              Veranstaltungen im Live-Einsatz. Aktuell in Arbeit: eine Bullet-Time-Erweiterung mit mehreren
+              synchron ausgelösten Kameras.
             </p>
             <div class="proj-tags">
               <span class="proj-tag">Raspberry Pi</span>
               <span class="proj-tag">Python</span>
               <span class="proj-tag">Verteilte Systeme</span>
-              <span class="proj-tag">Architektur</span>
+              <span class="proj-tag">Web Applikation</span>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+              <button class="btn-mehr" onclick="openModal('modal-fotobox')">Mehr Infos →</button>
+              <a class="proj-link" href="https://www.elbarthos.de" target="_blank">www.elbarthos.de &rarr;</a>
             </div>
           </div>
         </div>
 
         <div class="proj-item reveal">
-          <video class="proj-img" src="img/vegan-wars.mp4" autoplay muted loop playsinline></video>
-          <div class="proj-body">
-            <div class="proj-header">
-              <span class="proj-name">Vegan Wars</span>
-              <span class="proj-status active">in progress</span>
-            </div>
-            <p class="proj-desc">
-              Tower-Defence-Game entwickelt in Unity als privates Indie-Projekt.
-              Fokus auf Gameplay-Loop und Level-Design.
-            </p>
-            <div class="proj-tags">
-              <span class="proj-tag">Unity</span>
-              <span class="proj-tag">C#</span>
-              <span class="proj-tag">Game Design</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-item reveal">
-          <img class="proj-img" src="img/vr-lernspiel.jpg" alt="VR-Lernspiel" />
+          <img class="proj-img" src="img/vr-lernspiel.webp" alt="VR-Lernspiel" loading="lazy" />
           <div class="proj-body">
             <div class="proj-header">
               <span class="proj-name">VR-Lernspiel — Erste Hilfe</span>
@@ -962,7 +1075,7 @@
         </div>
 
         <div class="proj-item reveal">
-          <img class="proj-img" src="img/serious-coffee.jpg" alt="Serious Coffee" />
+          <img class="proj-img" src="img/serious-coffee.webp" alt="Serious Coffee" loading="lazy" />
           <div class="proj-body">
             <div class="proj-header">
               <span class="proj-name">Serious Coffee</span>
@@ -983,24 +1096,21 @@
         </div>
 
         <div class="proj-item reveal">
-          <img class="proj-img" src="img/fotobox.jpg" alt="Fotobox v1" />
+          <video class="proj-img" src="img/vegan-wars.mp4" autoplay muted loop playsinline></video>
           <div class="proj-body">
             <div class="proj-header">
-              <span class="proj-name">Fotobox v1</span>
-              <span class="proj-status done">abgeschlossen</span>
+              <span class="proj-name">Vegan Wars</span>
+              <span class="proj-status private">Privatprojekt</span>
             </div>
             <p class="proj-desc">
-              Erste Version einer Raspberry Pi Fotobox mit direktem Cloud-Upload.
+              Tower-Defence-Game in Unity als privates Indie-Projekt. Selbst modellierte 3D-Assets in Blender.
+              Fokus auf Gameplay-Loop und Level-Design.
             </p>
             <div class="proj-tags">
-              <span class="proj-tag">Raspberry Pi</span>
-              <span class="proj-tag">Python</span>
-              <span class="proj-tag">Verteilte Systeme</span>
-              <span class="proj-tag">Web Applikation</span>
-            </div>
-            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
-              <button class="btn-mehr" onclick="openModal('modal-fotobox')">Mehr Infos →</button>
-              <a class="proj-link" href="https://www.elbarthos.de" target="_blank">www.elbarthos.de &rarr;</a>
+              <span class="proj-tag">Unity</span>
+              <span class="proj-tag">C#</span>
+              <span class="proj-tag">Blender</span>
+              <span class="proj-tag">Game Design</span>
             </div>
           </div>
         </div>
@@ -1010,6 +1120,7 @@
             <iframe
               src="https://www.youtube-nocookie.com/embed/huJi64CNQJ0?rel=0"
               title="Jenga — Blender Kurzfilm"
+              loading="lazy"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen>
@@ -1021,12 +1132,14 @@
               <span class="proj-status done">abgeschlossen</span>
             </div>
             <p class="proj-desc">
-              Kurzfilm aus dem ersten Semester (2020) — komplett modelliert, geriggt und animiert in Blender.
+              Kurzfilm aus dem ersten Semester (2020): Storytelling, Modellierung, Rigging und Animation –
+              komplett in Blender umgesetzt.
             </p>
             <div class="proj-tags">
               <span class="proj-tag">Blender</span>
               <span class="proj-tag">3D-Modellierung</span>
               <span class="proj-tag">Animation</span>
+              <span class="proj-tag">Storytelling</span>
               <span class="proj-tag">Kurzfilm</span>
             </div>
             <a class="proj-link" href="https://www.youtube.com/watch?v=huJi64CNQJ0" target="_blank">YouTube &rarr;</a>
@@ -1042,7 +1155,7 @@
     <div class="container">
       <div class="section-header reveal">
         <span class="section-index">04</span>
-        <h2>contact</h2>
+        <h2>kontakt</h2>
       </div>
       <div class="contact-grid reveal">
         <a class="contact-item" href="mailto:tobias@elbarthos.de">
@@ -1053,35 +1166,72 @@
           <p class="contact-label">LinkedIn</p>
           <p class="contact-value">linkedin.com/in/elbarthos</p>
         </a>
-        <a class="contact-item" href="https://elbarthos.de" target="_blank">
-          <p class="contact-label">Fotobox</p>
-          <p class="contact-value">elbarthos.de</p>
-        </a>
       </div>
     </div>
   </section>
 
-  <section id="share">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-index">05</span>
-      <h2>share</h2>
-    </div>
-    <div class="share-card reveal">
-      <div class="share-qr" id="qr-canvas"></div>
-      <div class="share-info">
-        <p class="share-label">Portfolio</p>
-        <p class="share-url">elbarthos.github.io</p>
-        <p class="share-hint">QR-Code scannen oder Link teilen</p>
-        <a class="btn-ghost" href="https://elbarthos.github.io" target="_blank">elbarthos.github.io &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
-
   <!-- ====================================================
        MODALS
   ===================================================== -->
+
+  <!-- MODAL: Masterarbeit (unveröffentlicht: nur Konzept, keine Ergebnisse vor Abgabe) -->
+  <div class="modal-backdrop" id="modal-thesis" role="dialog" aria-modal="true" aria-labelledby="modal-thesis-title">
+    <div class="modal-card">
+      <div class="modal-top-bar">
+        <button class="modal-close" onclick="closeModal('modal-thesis')" aria-label="Schließen">✕</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-subtitle">Masterarbeit · HS Kempten · seit Oktober 2026</p>
+        <h3 class="modal-title" id="modal-thesis-title">Vision-Language-Action-Modelle als Skills in einer hybriden Behaviour-Tree-Architektur für einen Supermarktroboter</h3>
+
+        <p class="modal-section">Ausgangspunkt</p>
+        <p class="modal-text">
+          Die Arbeit knüpft an das Supermarktroboter-Projekt an: VLA-Modelle sollen einzelne Manipulationsaufgaben
+          übernehmen, während Behaviour Trees Struktur, Reaktivität und Fehlerbehandlung liefern.
+        </p>
+
+        <p class="modal-section">Ansatz</p>
+        <div class="modal-arch-grid">
+          <div class="modal-arch-tile">
+            <p class="mat-label">VLA-Skills</p>
+            <p class="mat-val">Gelernte Vision-Language-Action-Modelle übernehmen Greifen und Ablegen.</p>
+          </div>
+          <div class="modal-arch-tile">
+            <p class="mat-label">Klassische Skills</p>
+            <p class="mat-val">Bewegungsplanung mit MoveIt übernimmt den Transport.</p>
+          </div>
+          <div class="modal-arch-tile">
+            <p class="mat-label">Integration</p>
+            <p class="mat-val">VLA- und klassische Skills laufen als austauschbare Knoten in einer Behaviour-Tree-Architektur.</p>
+          </div>
+          <div class="modal-arch-tile">
+            <p class="mat-label">Vorgehen</p>
+            <p class="mat-val">Fine-Tuning per LoRA, Training in Simulation, Transfer auf den realen Roboter und Vergleich mit einer klassischen Pipeline.</p>
+          </div>
+        </div>
+
+        <p class="modal-section">Forschungsfrage</p>
+        <p class="modal-text">
+          Wie lassen sich VLA-Skills so integrieren, dass sie Aufgaben lösen, an denen eine rein klassische
+          Pipeline scheitert?
+        </p>
+
+        <p class="modal-section">Stand</p>
+        <p class="modal-text">
+          Die Arbeit läuft, die Abgabe ist für März 2027 geplant. Ergebnisse und Demo folgen nach der Abgabe.
+        </p>
+
+        <div class="modal-pills">
+          <span class="modal-pill">Vision-Language-Action</span>
+          <span class="modal-pill">LoRA</span>
+          <span class="modal-pill">ROS2</span>
+          <span class="modal-pill">MoveIt</span>
+          <span class="modal-pill">Behaviour Trees</span>
+          <span class="modal-pill">Sim-to-Real</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- MODAL: Supermarktroboter / RoboCup -->
   <div class="modal-backdrop" id="modal-robo" role="dialog" aria-modal="true" aria-labelledby="modal-robo-title">
@@ -1090,17 +1240,19 @@
         <button class="modal-close" onclick="closeModal('modal-robo')" aria-label="Schließen">✕</button>
       </div>
       <div class="modal-content">
-        <p class="modal-subtitle">RoboCup@Work · HS Kempten · SS 2026</p>
+        <p class="modal-subtitle">Masterprojekt · RoboCup@Work · HS Kempten · SS 2026</p>
         <h3 class="modal-title" id="modal-robo-title">Supermarktroboter — High Level Action Planning</h3>
 
-        <img class="modal-img-hero" src="img/robocup.jpg" alt="Franka Panda Roboterarm" loading="lazy" />
+        <img class="modal-img-hero" src="img/robocup.webp" alt="Franka Panda Roboterarm" loading="lazy" />
 
         <p class="modal-section">Projektbeschreibung</p>
         <p class="modal-text">
           Hochschulteam-Projekt im Rahmen des RoboCup@Work-Wettbewerbs: Ein Franka Panda Roboterarm
-          soll eigenständig Supermarktregale einräumen und Produkte nach Mindesthaltbarkeitsdatum sortieren.
+          soll auf Sprachbefehl Supermarktregale ein- und ausräumen und Produkte nach Mindesthaltbarkeitsdatum sortieren.
           Das High-Level-Team ist verantwortlich für den gesamten Planungs- und Ausführungsstack —
           von der natürlichsprachigen Nutzereingabe bis zum konkreten ROS2-Befehl an den Arm.
+          Im Projektzeitraum lief der High-Level-Stack gegen einen Mock-Action-Server, noch nicht auf dem
+          realen Arm – den Schritt auf reale Hardware gehe ich in meiner Masterarbeit.
         </p>
 
         <p class="modal-section">Technische Architektur</p>
@@ -1138,14 +1290,16 @@
 
         <p class="modal-section">Meine Aufgaben</p>
         <ul class="modal-list">
-          <li>GitHub-Ordnerstruktur aufgebaut und Issues für das Team koordiniert</li>
-          <li>Hexagonale Architektur (Ports &amp; Adapters) konzipiert und implementiert</li>
-          <li>Initialen BT-Runner Adapter erstellt — py_trees + rclpy Integration</li>
-          <li>WebUI entwickelt: FastAPI + WebSocket für Echtzeit-Monitoring des Behaviour Trees</li>
-          <li>Migration auf GPU-Server per Docker für lokale Ollama-Inferenz</li>
-          <li>Mock-Action-Server für ROS2-Tests ohne physische Hardware erstellt</li>
-          <li>UML-Diagramme, Poster und Präsentation für den Wettbewerb erstellt</li>
-          <li>Logistik: Beschaffung des Supermarktregals für das Testsetup</li>
+          <li>Grundsatzentscheidung Behaviour Tree vs. Function Calling im Team anhand aktueller Paper mit erarbeitet</li>
+          <li>Repository-Struktur für das Gesamtprojekt aufgesetzt und Arbeitspakete als GitHub-Issues verteilt</li>
+          <li>Hexagonale Architektur (Ports &amp; Adapters) entworfen und implementiert — inkl. Composition Root und Adapter-Template für das Team</li>
+          <li>BT-Runner-Adapter: führt den generierten Behaviour Tree in einer Tick-Loop aus und steuert den Roboter über ROS2-Action-Clients</li>
+          <li>Feedback-Adapter für Plan-Lifecycle-, BT-Node- und ROS2-Node-Status (Composite- und Observer-Pattern)</li>
+          <li>WebUI mit FastAPI + WebSocket zur Live-Visualisierung des Behaviour Trees</li>
+          <li>Mock-Action-Server für Tests ohne Hardware, inkl. gezielter Testfälle wie der Marken-Disambiguierung</li>
+          <li>Containerisierung per Docker Compose und Deployment auf dem GPU-Server für lokale Ollama-Inferenz</li>
+          <li>Setup-Anleitung und Setup-Skripte für Linux und Windows</li>
+          <li>Architektur- und Sequenzdiagramme (PlantUML), Projektposter, Pitch und 30-minütige Kolloquiumspräsentation</li>
         </ul>
 
         <div class="modal-pills">
@@ -1163,7 +1317,7 @@
     </div>
   </div>
 
-  <!-- MODAL: Fotobox v1 -->
+  <!-- MODAL: Fotobox -->
   <div class="modal-backdrop" id="modal-fotobox" role="dialog" aria-modal="true" aria-labelledby="modal-fotobox-title">
     <div class="modal-card">
       <div class="modal-top-bar">
@@ -1182,6 +1336,7 @@
           zeigt einen Live-Stream an, löst auf Knopfdruck aus, präsentiert das Ergebnis kurz auf
           dem Display und schiebt es im Hintergrund per SFTP auf den Webserver.
           Gäste scannen einen QR-Code und gelangen direkt zur passwortgeschützten Web-Galerie.
+          Seit 2018 war die Box auf rund 30 Veranstaltungen im Einsatz.
         </p>
 
         <p class="modal-section">Features</p>
@@ -1210,6 +1365,13 @@
           Kameraparameter, Speicherpfad und SFTP-Zugangsdaten direkt auf dem Gerät anpassen.
           Per SSH können Updates eingespielt, Logs eingesehen und der Service neugestartet werden,
           ohne die Box physisch anfassen zu müssen.
+        </p>
+
+        <p class="modal-section">In Arbeit: Bullet-Time-Erweiterung</p>
+        <img class="modal-img-hero" src="img/bullet-time.webp" alt="Bullet-Time-Aufbau mit mehreren Kameras" loading="lazy" />
+        <p class="modal-text">
+          Multi-Kamera-Setup auf Raspberry-Pi-Basis: Mehrere Kameras lösen synchron aus, die Bilder werden
+          verteilt verarbeitet und als Bullet-Time-Effekt direkt in einer lokalen Vorschau angezeigt.
         </p>
 
         <div class="modal-pills">
@@ -1296,7 +1458,6 @@
       </div>
     </div>
   </footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver(
@@ -1306,14 +1467,6 @@
       { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     );
     reveals.forEach(el => observer.observe(el));
-    new QRCode(document.getElementById("qr-canvas"), {
-      text: "https://elbarthos.github.io",
-      width: 160,
-      height: 160,
-      colorDark: "#e2eaf8",
-      colorLight: "#0d1220",
-      correctLevel: QRCode.CorrectLevel.H
-    });
 
     // ---- Modal logic ----
     function openModal(id) {
