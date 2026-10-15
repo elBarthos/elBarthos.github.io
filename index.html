@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tobias Barth</title>
+  <script>
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
   <meta name="description" content="Tobias Barth, Software Engineer mit Fokus auf KI für Robotik. Master-Student KI &amp; Computer Vision an der Hochschule Kempten, verfügbar ab April 2027." />
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
@@ -23,6 +29,38 @@
 
   <style>
     :root {
+      color-scheme: light;
+      --bg: #f5f7fb;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f0f4fa;
+      --accent: #1f6fd1;
+      --accent-dim: #3d78c6;
+      --accent-bright: #1559b5;
+      --accent-glow: #1f6fd112;
+      --text: #0f1a2e;
+      --text-secondary: #4a5b75;
+      --text-muted: #8392a8;
+      --border: #e2e8f1;
+      --border-hover: #c8d3e3;
+      --nav-bg: #f5f7fbe6;
+      --on-accent: #ffffff;
+      --accent-border: #1f6fd133;
+      --accent-border-strong: #1f6fd180;
+      --accent-glow-strong: #1f6fd11f;
+      --done: #5f54cf;
+      --done-bg: #f0eefd;
+      --done-border: #5f54cf33;
+      --classic-border: #5f54cf80;
+      --classic-text: #5248c2;
+      --backdrop: rgba(15, 26, 46, 0.45);
+      --sun-display: none;
+      --moon-display: block;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    /* Dark theme: only when chosen via the nav toggle (data-theme on <html>) */
+    :root[data-theme="dark"] {
       --bg: #080c14;
       --bg-card: #0d1220;
       --bg-card-hover: #111828;
@@ -35,8 +73,20 @@
       --text-muted: #334560;
       --border: #182038;
       --border-hover: #243060;
-      --mono: 'DM Mono', monospace;
-      --sans: 'DM Sans', sans-serif;
+      --nav-bg: #080c14e0;
+      --on-accent: #080c14;
+      --accent-border: #4a9eff2a;
+      --accent-border-strong: #4a9eff66;
+      --accent-glow-strong: #4a9eff22;
+      --done: #8b82f0;
+      --done-bg: #1a1a2e;
+      --done-border: #8b82f033;
+      --classic-border: #8b82f066;
+      --classic-text: #b3acf7;
+      --backdrop: rgba(8, 12, 20, 0.88);
+      --sun-display: block;
+      --moon-display: none;
+      color-scheme: dark;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,7 +133,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #080c14e0;
+      gap: 0.75rem;
+      background: var(--nav-bg);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
@@ -96,7 +147,25 @@
       text-decoration: none;
     }
 
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+
+    .theme-toggle {
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid var(--border-hover);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .theme-toggle:hover { color: var(--accent-bright); border-color: var(--accent-dim); }
+    .theme-toggle svg { width: 15px; height: 15px; }
+    .theme-toggle .icon-sun { display: var(--sun-display); }
+    .theme-toggle .icon-moon { display: var(--moon-display); }
 
     .nav-links a {
       font-family: var(--mono);
@@ -105,6 +174,7 @@
       text-decoration: none;
       letter-spacing: 0.08em;
       text-transform: lowercase;
+      white-space: nowrap;
       transition: color 0.2s;
     }
 
@@ -194,7 +264,7 @@
       letter-spacing: 0.06em;
       padding: 0.7rem 1.5rem;
       background: var(--accent);
-      color: #080c14;
+      color: var(--on-accent);
       border: none;
       border-radius: 10px;
       text-decoration: none;
@@ -264,6 +334,8 @@
 
     .cv-link:hover { gap: 0.9rem; color: var(--accent-bright); }
 
+    .cv-links { display: flex; flex-wrap: wrap; column-gap: 2rem; }
+
     /* ---- SKILLS ---- */
     .skills-block { margin-bottom: 2rem; }
 
@@ -318,7 +390,7 @@
     .proj-img-placeholder {
       width: 100%;
       height: 200px;
-      background: linear-gradient(135deg, #0d1220 0%, #111828 100%);
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-hover) 100%);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -328,7 +400,7 @@
     .proj-schema {
       width: 100%;
       height: 300px;
-      background: linear-gradient(135deg, #0d1220 0%, #111828 100%);
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-hover) 100%);
       border-bottom: 1px solid var(--border);
       display: flex;
       flex-direction: column;
@@ -354,8 +426,8 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
-    .bt-node.vla { border-color: #4a9eff66; color: var(--accent-bright); }
-    .bt-node.classic { border-color: #8b82f066; color: #b3acf7; }
+    .bt-node.vla { border-color: var(--accent-border-strong); color: var(--accent-bright); }
+    .bt-node.classic { border-color: var(--classic-border); color: var(--classic-text); }
     .bt-root { position: relative; margin-bottom: 40px; }
     .bt-root::after,
     .bt-children .bt-node::before {
@@ -431,8 +503,8 @@
       white-space: nowrap;
     }
 
-    .proj-status.active { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid #4a9eff33; }
-    .proj-status.done   { background: #1a1a2e; color: #8b82f0; border: 1px solid #8b82f033; }
+    .proj-status.active { background: var(--accent-glow); color: var(--accent-bright); border: 1px solid var(--accent-border); }
+    .proj-status.done   { background: var(--done-bg); color: var(--done); border: 1px solid var(--done-border); }
     .proj-status.private { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-hover); }
 
     .proj-desc {
@@ -566,15 +638,22 @@
     /* ---- RESPONSIVE ---- */
     @media (max-width: 600px) {
       nav { padding: 1rem 1.25rem; }
-      .nav-links { gap: 1.25rem; }
+      .nav-links { gap: 1rem; }
       .container { padding: 0 1.25rem; }
       section { padding: 3.5rem 0; }
       .hero-content { padding: 7rem 0 3.5rem; }
     }
 
-    @media (max-width: 420px) {
-      .nav-links a { font-size: 10px; }
-      .nav-links { gap: 0.85rem; }
+    @media (max-width: 460px) {
+      .nav-links a { font-size: 10px; letter-spacing: 0.02em; }
+      .nav-links { gap: 0.6rem; }
+      .nav-logo { font-size: 12px; }
+      .theme-toggle { width: 28px; height: 28px; }
+    }
+
+    @media (max-width: 370px) {
+      nav { justify-content: flex-end; }
+      .nav-logo { display: none; }
     }
 
     /* ---- MEHR INFOS BUTTON ---- */
@@ -588,19 +667,19 @@
       color: var(--accent);
       letter-spacing: 0.04em;
       background: var(--accent-glow);
-      border: 1px solid #4a9eff2a;
+      border: 1px solid var(--accent-border);
       border-radius: 8px;
       padding: 0.45rem 1rem;
       cursor: pointer;
       transition: background 0.2s, border-color 0.2s, color 0.2s;
     }
-    .btn-mehr:hover { background: #4a9eff22; border-color: var(--accent-dim); color: var(--accent-bright); }
+    .btn-mehr:hover { background: var(--accent-glow-strong); border-color: var(--accent-dim); color: var(--accent-bright); }
 
     /* ---- MODAL OVERLAY ---- */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(8, 12, 20, 0.88);
+      background: var(--backdrop);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       z-index: 200;
@@ -738,7 +817,7 @@
       font-family: var(--mono);
       font-size: 10px;
       padding: 3px 11px;
-      border: 1px solid #4a9eff2a;
+      border: 1px solid var(--accent-border);
       border-radius: 8px;
       color: var(--accent-bright);
       background: var(--accent-glow);
@@ -821,6 +900,12 @@
       <li><a href="#skills">skills</a></li>
       <li><a href="#projects">projekte</a></li>
       <li><a href="#contact">kontakt</a></li>
+      <li>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Hell-/Dunkelmodus umschalten" title="Hell-/Dunkelmodus umschalten">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </li>
     </ul>
   </nav>
 
@@ -878,9 +963,14 @@
       <p class="about-text reveal">
         Ab April 2027 suche ich eine Stelle im Bereich KI und Robotik – bevorzugt im Allgäu, gerne auch hybrid.
       </p>
-      <a class="cv-link reveal" href="https://elBarthos.github.io/cv.html" target="_blank">
-        Lebenslauf &rarr;
-      </a>
+      <div class="cv-links reveal">
+        <a class="cv-link" href="https://elBarthos.github.io/cv.html" target="_blank">
+          Lebenslauf &rarr;
+        </a>
+        <a class="cv-link" href="Lebenslauf_Tobias_Barth.pdf" download>
+          PDF herunterladen &darr;
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1467,6 +1557,14 @@
       { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     );
     reveals.forEach(el => observer.observe(el));
+
+    // ---- Theme toggle ----
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const root = document.documentElement;
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
 
     // ---- Modal logic ----
     function openModal(id) {

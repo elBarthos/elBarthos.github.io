@@ -274,8 +274,17 @@
   .p1fp-list li { display: flex; align-items: center; gap: 5px; }
   .p1fp-list li svg { width: 10px; height: 10px; fill: currentColor; flex-shrink: 0; }
 
+  .pdf-btn {
+    position: fixed; top: 14px; right: 14px; z-index: 10;
+    font-family: var(--mono); font-size: 8pt; letter-spacing: .04em;
+    color: #fff; background: var(--blue); text-decoration: none;
+    padding: 7px 13px; border-radius: 8px; box-shadow: 0 4px 14px rgba(20,30,55,.22);
+  }
+  .pdf-btn:hover { background: var(--blue-deep); }
+
   @media print {
     html { background: #fff; }
+    .pdf-btn { display: none; }
     .page {
       margin: 0; box-shadow: none; width: 210mm; height: 297mm;
       page-break-after: always; break-after: page;
@@ -303,6 +312,8 @@
 </style>
 </head>
 <body>
+
+<a class="pdf-btn" href="Lebenslauf_Tobias_Barth.pdf" download>PDF herunterladen</a>
 
 <!-- SEITE 1 -->
 <section class="page">
